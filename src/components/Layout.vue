@@ -1,30 +1,35 @@
 <template>
-  <div>
-    <!-- <div class="f-column"> -->
-    <div class="main-header f-row">
+  <div class="'easyui-layout">
+    <div class="f-column">
+      <div class="main-header f-row">
+        <div class="f-row f-full">
+          <div class="main-title f-animate f-row" :style="{width:width+'px'}">
+            <img class="app-logo" src="https://www.jeasyui.com/favicon.ico">
+            <span v-if="!collapsed">{{title}}</span>
+          </div>
+          <div class="main-bar">
+            <span class="main-toggle fa fa-bars" @click="toggle()"></span>
+          </div>
+        </div>
+      </div>
       <div class="f-row f-full">
-        <div class="main-title f-animate f-row" :style="{width:width+'px'}">
-          <img class="app-logo" src="https://www.jeasyui.com/favicon.ico">
-          <span v-if="!collapsed">{{title}}</span>
+        <div class="sidebar-body f-animate" :style="{width:width+'px'}">
+          <!-- <div v-if="!collapsed" class="sidebar-user">
+            User Panel
+          </div> -->
+          <SideMenu :data="menus" :border="false" :collapsed="collapsed" @itemClick="onItemClick($event)"></SideMenu>
         </div>
-        <div class="main-bar">
-          <span class="main-toggle fa fa-bars" @click="toggle()"></span>
+        <div class="main-body f-full">
+          <p v-if="selectedMenu">{{selectedMenu.text}}</p>
+          <Tabs :scrollable="true" class="easyui-layou" data-options="fit:true">
+            <TabPanel v-for="lang in languages" :key="lang" :title="lang" :closable="true">
+              <div style="padding:20px;height:510px">{{lang}}</div>
+            </TabPanel>
+          </Tabs>
         </div>
-      </div>
-    </div>
-    <div class="f-row f-full">
-      <div class="sidebar-body f-animate" :style="{width:width+'px'}">
-        <div v-if="!collapsed" class="sidebar-user">
-          User Panel
-        </div>
-        <SideMenu :data="menus" :border="false" :collapsed="collapsed" @itemClick="onItemClick($event)"></SideMenu>
-      </div>
-      <div class="main-body f-full">
-        <p v-if="selectedMenu">{{selectedMenu.text}}</p>
       </div>
     </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -35,6 +40,22 @@ export default {
       width: 200,
       collapsed: false,
       selectedMenu: null,
+      languages: [
+        '首页',
+        '基础数据管理',
+        '订单管理',
+        '调度单管理',
+        'Pascal',
+        'C++',
+        'Java',
+        'JavaScript',
+        'Fortran',
+        'Perl',
+        'Ruby',
+        'Python',
+        'Scratch',
+        'Erlang'
+      ],
       menus: [
         {
           text: 'Forms',
@@ -90,6 +111,96 @@ export default {
               text: 'Tabs'
             }
           ]
+        },
+        {
+          text: '用户管理',
+          iconCls: 'fa fa-table',
+          children: [
+            {
+              text: '添加用户'
+            },
+            {
+              text: '删除用户'
+            },
+            {
+              text: '修改用户'
+            }
+          ]
+        },
+        {
+          text: '订单管理',
+          iconCls: 'fa fa-table',
+          children: [
+            {
+              text: '查看订单'
+            },
+            {
+              text: '统计订单'
+            },
+            {
+              text: '回收站'
+            }
+          ]
+        },
+        {
+          text: '工作流',
+          iconCls: 'fa fa-table',
+          children: [
+            {
+              text: '添加用户'
+            },
+            {
+              text: '删除用户'
+            },
+            {
+              text: '修改用户'
+            }
+          ]
+        },
+        {
+          text: '定时任务',
+          iconCls: 'fa fa-table',
+          children: [
+            {
+              text: '查看订单'
+            },
+            {
+              text: '统计订单'
+            },
+            {
+              text: '回收站'
+            }
+          ]
+        },
+        {
+          text: '接口文档',
+          iconCls: 'fa fa-table',
+          children: [
+            {
+              text: '添加用户'
+            },
+            {
+              text: '删除用户'
+            },
+            {
+              text: '修改用户'
+            }
+          ]
+        },
+        {
+          text: '操作日志',
+          iconCls: 'fa fa-table',
+          children: [
+            {
+              text: '查看订单'
+            },
+            {
+              text: '统计订单'
+            },
+            {
+              text: '回收站'
+            }
+          ]
         }
       ]
     }
@@ -106,8 +217,6 @@ export default {
 }
 </script>
 <style>
-@import 'https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-
 .sidemenu .accordion .panel-title {
   color: #b8c7ce;
 }

@@ -6,6 +6,7 @@ import router from './router'
 import 'vx-easyui/dist/themes/default/easyui.css'
 import 'vx-easyui/dist/themes/icon.css'
 import 'vx-easyui/dist/themes/vue.css'
+import 'font-awesome/css/font-awesome.min.css'
 import EasyUI from 'vx-easyui'
 
 Vue.use(EasyUI)
